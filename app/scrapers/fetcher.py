@@ -8,6 +8,8 @@ def fetcher(url, session):
     for attempt in range(1, max_attempts + 1):
         try:
             response = session.get(url, timeout=10)
+            print(response.status_code)
+            print(response.headers)
             response.raise_for_status()
             return response.text
         except requests.HTTPError as e:
