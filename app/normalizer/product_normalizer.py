@@ -58,10 +58,3 @@ def validate_products(raw_dicts: List[dict]) -> List[product_data.RawProductData
 
     return raw_products
 
-
-products = validate_products(raw_products)
-for product in products:
-    print(product)
-
-
-#def scrape_jumia(source_url: str, session) -> tuple[List[dict], Exception | None]:
