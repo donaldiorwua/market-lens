@@ -5,25 +5,26 @@ def collect_brandlyng_products(session):
     url = "https://brandlyng.myshopify.com/api/2026-07/graphql.json"
 
     query = """
-    {
-        products(first: 5) {
-            nodes {
-                id
-                title
-                handle
-                variants(first: 5) {
-                    nodes {
-                        price {
-                            amount
-                            currencyCode
+        {
+            products(first: 5) {
+                nodes {
+                    id
+                    title
+                    handle
+                    variants(first: 5) {
+                        nodes {
+                            id
+                            price {
+                                amount
+                                currencyCode
+                            }
+                            availableForSale
                         }
-                        availableForSale
                     }
                 }
             }
         }
-    }
-    """
+        """
 
     payload = {
         "query": query
@@ -64,6 +65,8 @@ def collect_brandlyng_products(session):
 
         for variant in variants:
             variant_dict = {
+                "source_product_id": product["id"],
+                "source_variant_id": variant["id"],
                 "product_name": title,
                 "price": variant["price"]["amount"],
                 "currency": variant["price"]["currencyCode"],

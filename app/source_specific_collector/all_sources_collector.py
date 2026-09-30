@@ -1,9 +1,14 @@
+from app.source_specific_collector.shopify import collect_brandlyng_products
+from app.scrapers import scraper_config
 
+def collect_mock_products(session):
+    error = Exception("Mock collector: simulated failure")
+    return [], error
 
 def collect_all_sources(session):
     products = []
     failed_sources = []
-    
+
     collectors = [
         (collect_brandlyng_products, "Brandlyng"),
         (collect_mock_products, "Mock"),
