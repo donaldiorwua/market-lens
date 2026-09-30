@@ -31,7 +31,3 @@ def json_to_list(filename):
 
     return result
 
-raw_dicts = json_to_list("shopify_apidata.txt")
-raw_products = product_normalizer.validate_products(raw_dicts)
-products = product_normalizer.validate_products(raw_products)
-print(raw_products)
