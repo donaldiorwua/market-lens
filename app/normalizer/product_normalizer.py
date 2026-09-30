@@ -8,6 +8,8 @@ def normalize_product(raw_data: product_data.RawProductData) -> product_data.Pro
     normalized_currency = raw_data.currency.strip().upper()
 
     return product_data.ProductData(
+        source_product_id = raw_data.source_product_id,
+        source_variant_id = raw_data.source_variant_id,
         product_name = normalized_product_name,
         price = raw_data.price,
         currency = normalized_currency,
@@ -26,6 +28,8 @@ def normalize_products(raw_products: List[product_data.RawProductData]) -> List[
 
 raw_products = [
     product_data.RawProductData(
+        source_product_id= "mock-product-001",
+        source_variant_id= "mock-variant-001",
         product_name="  Samsung Galaxy A15  ",
         price="28000",
         currency=" ngn ",
@@ -34,6 +38,8 @@ raw_products = [
         availability=True
     ),
     product_data.RawProductData(
+        source_product_id= "mock-product-001",
+        source_variant_id= "mock-variant-001",
         product_name="  iPhone 15 ",
         price="450000",
         currency=" usd ",
@@ -42,19 +48,3 @@ raw_products = [
         availability=True
     )
 ]
-
-
-def validate_product(raw_dict: dict) -> product_data.RawProductData:
-    raw_product = product_data.RawProductData.model_validate(raw_dict) 
-
-    return raw_product
-
-
-def validate_products(raw_dicts: List[dict]) -> List[product_data.RawProductData]:
-    raw_products = [
-        validate_product(item)
-        for item in raw_dicts
-    ]
-
-    return raw_products
-
